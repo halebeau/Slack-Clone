@@ -4,7 +4,13 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { sidebarItemsData } from '../data/SidebarData'
 import AddIcon from '@material-ui/icons/Add';
 
-function Sidebar() {
+function Sidebar(props) {
+
+    const addChannel = () => {
+        const promptName = prompt("Enter channel name");
+        console.log(promptName);
+    }
+
     return (
         <Container>
             <WorkspaceContainer>
@@ -27,16 +33,19 @@ function Sidebar() {
             </MainChannels>
             <ChannelsContainer>
                 <NewChannelContainer>
-                    <div>Channels</div>
-                <AddIcon />
+                    <div>
+                        Channels
+                    </div>
+                <AddIcon onClick={addChannel} />
                 </NewChannelContainer>
                 <ChannelsList>
-                    <Channel>
-                        # Channel 1
-                    </Channel>
-                    <Channel>
-                        # Channel 2
-                    </Channel>
+                    {
+                        props.rooms.map(item => (
+                            <Channel>
+                                # {item.name}
+                            </Channel>
+                        ))
+                    }
                 </ChannelsList>
             </ChannelsContainer>
 
@@ -78,7 +87,6 @@ const NewMessage = styled.div`
 
 const MainChannels = styled.div`
     padding-top: 20px;
-
 `
 
 const MainChannelItem = styled.div`
@@ -90,13 +98,12 @@ const MainChannelItem = styled.div`
     padding-left: 19px;
     cursor: pointer;
     :hover {
-        background: #350D36;
+    background: #350D36;
     }
 `
 const ChannelsContainer = styled.div`
     color: rgb(188,171,188); 
-    margin-top: 10px;  
-
+    margin-top: 10px;
 `
 const NewChannelContainer = styled.div`
     display: flex;
@@ -106,9 +113,7 @@ const NewChannelContainer = styled.div`
     padding-left: 20px;
     padding-right: 12px;
 `
-const ChannelsList = styled.div`
-    
-`
+const ChannelsList = styled.div``
 const Channel = styled.div`
     height: 28px;
     display: flex;
@@ -116,6 +121,6 @@ const Channel = styled.div`
     padding-left: 19px;
     cursor: pointer;
     :hover {
-        background: #350D36;
+    background: #350D36;
     }
 `
