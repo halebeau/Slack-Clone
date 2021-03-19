@@ -1,14 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { sidebarItemsData } from '../data/SidebarData'
 import AddIcon from '@material-ui/icons/Add';
+import db from '../firebase'
+import { useHistory } from 'react-router-dom'
 
 function Sidebar(props) {
 
+    const history = useHistory();
+
+
+    const goToChannel = (id) => {
+        if(id){
+            console.log(id);
+            history.push(`/room/${id}`)
+        }
+    }
+
+
     const addChannel = () => {
         const promptName = prompt("Enter channel name");
-        console.log(promptName);
+        if(promptName){
+            db.collection('rooms').add({
+                name: promptName
+            })
+        }
     }
 
     return (
@@ -36,27 +53,28 @@ function Sidebar(props) {
                     <div>
                         Channels
                     </div>
-                <AddIcon onClick={addChannel} />
+                    <AddIcon onClick={addChannel} />
                 </NewChannelContainer>
                 <ChannelsList>
                     {
                         props.rooms.map(item => (
-                            <Channel>
+                            <Channel onClick={()=>goToChannel(item.id)}>
                                 # {item.name}
                             </Channel>
                         ))
                     }
                 </ChannelsList>
             </ChannelsContainer>
-
+            
         </Container>
     )
 }
 
-export default Sidebar;
+export default Sidebar
+
 
 const Container = styled.div`
-    background-color: #3F0E40;
+    background: #3F0E40;
 `
 
 const WorkspaceContainer = styled.div`
@@ -66,11 +84,11 @@ const WorkspaceContainer = styled.div`
     align-items: center;
     padding-left: 19px;
     justify-content: space-between;
-    border-bottom: 1px solid #532753;
+    border-bottom: 1px solid  #532753;
 `
-const Name = styled.div`
 
-`
+const Name = styled.div``
+
 const NewMessage = styled.div`
     width: 36px;
     height: 36px;
@@ -98,22 +116,26 @@ const MainChannelItem = styled.div`
     padding-left: 19px;
     cursor: pointer;
     :hover {
-    background: #350D36;
+        background: #350D36;
     }
 `
+
 const ChannelsContainer = styled.div`
-    color: rgb(188,171,188); 
+    color: rgb(188,171,188);
     margin-top: 10px;
 `
+
 const NewChannelContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 28px;
-    padding-left: 20px;
+    padding-left: 19px;
     padding-right: 12px;
 `
+
 const ChannelsList = styled.div``
+
 const Channel = styled.div`
     height: 28px;
     display: flex;
@@ -121,6 +143,6 @@ const Channel = styled.div`
     padding-left: 19px;
     cursor: pointer;
     :hover {
-    background: #350D36;
+        background: #350D36;
     }
 `
