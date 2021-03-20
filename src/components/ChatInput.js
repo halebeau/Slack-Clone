@@ -1,86 +1,139 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import SendIcon from '@material-ui/icons/Send';
+import React, { useState } from "react";
+import styled from "styled-components";
+import SendIcon from "@material-ui/icons/Send";
+import CustomSlackButton from "./custom_slack_button";
+import FlashOnRoundedIcon from "@material-ui/icons/FlashOnRounded";
+import FormatBoldRoundedIcon from "@material-ui/icons/FormatBoldRounded";
+import FormatItalicRoundedIcon from "@material-ui/icons/FormatItalicRounded";
+import StrikethroughSRoundedIcon from "@material-ui/icons/StrikethroughSRounded";
+import CodeRoundedIcon from "@material-ui/icons/CodeRounded";
+import LinkRoundedIcon from "@material-ui/icons/LinkRounded";
+import FormatListNumberedRoundedIcon from "@material-ui/icons/FormatListNumberedRounded";
+import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
+import FormatQuoteRoundedIcon from "@material-ui/icons/FormatQuoteRounded";
+import DeveloperModeRoundedIcon from "@material-ui/icons/DeveloperModeRounded";
 
 function ChatInput({ sendMessage }) {
+const [messageInput, setMessageInput] = useState("");
 
-    const [input, setInput] = useState("");
+const send = (e) => {
+    e.preventDefault();
 
-
-    const send = (e) => {
-        e.preventDefault();
-        if(!input) return;
-        sendMessage(input)
-        setInput("")
-    }
-
+    if (!messageInput) return;
+    sendMessage(messageInput);
+    setMessageInput("");
+    };
 
     return (
         <Container>
-            <InputContainer>
-                <form>
-                    <input 
-                        onChange={(e)=>setInput(e.target.value)}
-                        type="text" 
-                        value={input}
-                        placeholder="Message here..." />
-                    <SendButton 
-                        type="submit"
-                        onClick={send}>
-                        <Send />
-                    </SendButton>
-                </form>
-            </InputContainer>
+        <InputContainer>
+            <form>
+            <textarea
+                rows="1"
+                maxLength="500"
+                type="text"
+                value={messageInput}
+                placeholder="Message here..."
+                onChange={(e) => setMessageInput(e.target.value)}
+            />
+            <ChatInputEditor>
+                <LeftChatEditor>
+                <CustomSlackButton icon={<FlashOnRoundedIcon />} />
+
+                <Separator>|</Separator>
+                <CustomSlackButton icon={<FormatBoldRoundedIcon />} />
+                <CustomSlackButton icon={<FormatItalicRoundedIcon />} />
+                <CustomSlackButton icon={<StrikethroughSRoundedIcon />} />
+                <CustomSlackButton icon={<CodeRoundedIcon />} />
+                <CustomSlackButton icon={<LinkRoundedIcon />} />
+                <CustomSlackButton icon={<FormatListNumberedRoundedIcon />} />
+                <CustomSlackButton icon={<FormatListBulletedRoundedIcon />} />
+                <CustomSlackButton icon={<FormatQuoteRoundedIcon />} />
+                <CustomSlackButton icon={<DeveloperModeRoundedIcon />} />
+                </LeftChatEditor>
+
+                <RightChatEditor>
+                <SendButton type="submit" onClick={send}>
+                    <SendIcon />
+                </SendButton>
+                </RightChatEditor>
+            </ChatInputEditor>
+            </form>
+        </InputContainer>
         </Container>
-    )
+    );
 }
 
-export default ChatInput
+export default ChatInput;
 
 const Container = styled.div`
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 24px;
-`
+`;
 
 const InputContainer = styled.div`
-    border: 1px solid #8D8D8E;
-    border-radius: 4px;
+    box-shadow: 5px 5px 15px 3px ${({ theme }) => theme.chatInputBoxShadowColor};
+    border-radius: 10px;
     form {
         display: flex;
-        height: 42px;
-        align-items: center;
+        flex-direction: column;
+        height: min-content;
+        align-items: space-evenly;
         padding-left: 10px;
-        input {
-            flex: 1;
-            border: none;
-            font-size: 13px;
-        }
-        input:focus {
-            outline: none;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    textarea {
+        flex: 1;
+        border: none;
+        font-size: 13px;
+        background: transparent;
+        resize: none;
+        overflow: hidden;
+        color: ${({ theme }) => theme.text};
+    }
+    textarea:focus {
+        outline: none;
         }
     }
-`
+    `;
 
-const SendButton = styled.button`
+const ChatInputEditor = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const LeftChatEditor = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const Separator = styled.span`
+    font-size: 20px;  
+`;
+
+const RightChatEditor = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const SendButton = styled.div`
     background: #007a5a;
-    border-radius: 2px;
-    width: 32px;
+    color: #d9d9d9;
+    border-radius: 10px;
+    width: 40px;
     height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 5px;
     cursor: pointer;
-    border: none;
+    transition: 0.25s ease;
+    :hover {
+        transform: scale(0.9);
+    }
     .MuiSvgIcon-root {
         width: 18px;
     }
-    :hover {
-        background: #148567
-    }
-`
-
-const Send = styled(SendIcon)`
-    color: #D9D9D9;
-`
+`;

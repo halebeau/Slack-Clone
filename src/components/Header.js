@@ -32,7 +32,7 @@ export default Header
 
 
 const Container = styled.div`
-    background: #350d36;
+    background: #112D32;
     color: white;
     display: flex;
     align-items: center;

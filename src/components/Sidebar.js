@@ -74,17 +74,17 @@ export default Sidebar
 
 
 const Container = styled.div`
-    background: #3F0E40;
+    background: #254E58;
 `
 
 const WorkspaceContainer = styled.div`
-    color: white;
+    color: rgb(188,171,188);
     height: 64px;
     display: flex;
     align-items: center;
     padding-left: 19px;
     justify-content: space-between;
-    border-bottom: 1px solid  #532753;
+    border-bottom: 1px solid #6E6658;
 `
 
 const Name = styled.div``
@@ -92,9 +92,9 @@ const Name = styled.div``
 const NewMessage = styled.div`
     width: 36px;
     height: 36px;
-    background: white;
-    color: #3F0E40;
-    fill: #3F0E40;
+    background: #40575b;
+    color: #112D32;
+    fill: #112D32;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,7 +116,7 @@ const MainChannelItem = styled.div`
     padding-left: 19px;
     cursor: pointer;
     :hover {
-        background: #350D36;
+        background: #112D32;
     }
 `
 
@@ -143,6 +143,6 @@ const Channel = styled.div`
     padding-left: 19px;
     cursor: pointer;
     :hover {
-        background: #350D36;
+        background: #112d32;
     }
-`
+`;

@@ -122,9 +122,10 @@ const Header = styled.div`
     padding-right: 20px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(83, 39, 83,.13);
+    border-bottom: 1px solid rgba(83, 39, 83, 0.13);
     justify-content: space-between;
-`
+    background-color: #88BDBC;
+`;
 
 const MessageContainer = styled.div`
     display: flex;

@@ -42,12 +42,13 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("https://www.xmple.com/wallpaper/gradient-blue-green-linear-1920x1080-c2-00008b-00fa9a-a-60-f-14.svg");
 `
 
 const Content = styled.div`
-    background: white;
-    padding: 100px;
-    border-radius: 5px;
+    background: #ebeeee;
+    padding: 70px;
+    border-radius: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,7 +61,7 @@ const SlackImg = styled.img`
 `
 
 const SignInButton = styled.button`
-    margin-top: 50px;
+    margin-top: 30px;
     background-color: #0a8d48;
     color: white;
     border: none;
